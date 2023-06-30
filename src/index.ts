@@ -11,13 +11,11 @@ class Hero {
     this.life = life;
   }
 
-  attack(opponent: Hero) {
+  attack(opponent: Hero) : void {
     opponent.life -= this.power;
     console.log(`${this.name} attaque ${opponent.name}`);
-    console.log(`${opponent.name} perd ${this.power}`);
     console.log(`La vie de ${opponent.name} est maintenant de ${opponent.life}`);
     console.log(`${opponent.name} attaque ${this.name}`);
-    console.log(`${this.name} perd ${opponent.power}`);
     console.log(`La vie de ${this.name} est maintenant de ${this.life}`);
   }
 
@@ -74,13 +72,10 @@ class HeroAxe extends Hero {
 
   attack(opponent: Hero) {
     if (opponent instanceof HeroSword) {
-      console.log("je suis passe dans le if");
-      
-        opponent.setprivateLife(opponent.getprivateLife() - this.getprivatePower()*2);
+      console.log("coucou");
+        opponent.setprivateLife(opponent.getprivateLife() - (this.getprivatePower()*2));
     } else {
-      console.log("je suis passé dans le else");
-      
-        super.attack(opponent);
+              super.attack(opponent);
     }
   }
 }
@@ -125,26 +120,23 @@ class HeroSpear extends Hero {
 }
 
 // L'instance de HeroSpear
-const hero5 = new HeroSpear("Hans", 12, 90, Weapon);
+const hero5:HeroSpear = new HeroSpear("Hans", 12, 90, Weapon);
 // console.log(hero5);
 
 
 
 ////////////////////////////////////////////////////////
 
+// L'instance de HeroAxe et de Herosword
+const hero3:HeroAxe = new HeroAxe("Flint", 10, 120, Weapon);
+const hero4:HeroSword = new HeroSword("Shendor", 25, 95, Weapon);
 
 // Affrontement de hero3 (Flint) vs hero4 (Shendor)
-
-// L'instance de HeroAxe
-const hero3 = new HeroAxe("Flint", 10, 130, Weapon);
-
-// L'instance de HeroSword
-const hero4 = new HeroSword("Shendor", 20, 75, Weapon);
-
+// J'ai modifié les valeurs power et life des 2 personnages jusqu'à obtenir un draw
 while (hero3.isAlive() && hero4.isAlive()) {
   hero3.attack(hero4);
   hero4.attack(hero3);
-}
+} 
 
 if (!hero3.isAlive() && !hero3.isAlive()){
 console.log("It's a draw !");
